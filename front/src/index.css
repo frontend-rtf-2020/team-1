@@ -1,0 +1,16 @@
+*{
+    background-color: palegoldenrod;
+    margin: 0;
+    padding: 0;
+}
+.logo{
+    background: olivedrab;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.messlogo{
+    padding: 5px;
+    max-width: 100%;
+    box-sizing: border-box;
+}

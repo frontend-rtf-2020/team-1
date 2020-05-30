@@ -1,0 +1,34 @@
+<%- include('layout/header.ejs')%>
+
+<div class="limiter">
+    <div style="background-image: url('/front/public/images/background.jpg');" class="container-login">
+        <div class="wrap">
+            <form method="post" action="/api/auth" name="reg" class="form">
+                <div class="container">
+                    <h1>Авторизация</h1>
+                    <p>Заполните форму, чтобы создать аккаунт.</p>
+                    <hr>
+
+                    <label for="username"><b>Имя пользователя</b></label>
+                    <input type="text" placeholder="Введите имя пользователя" name="username" required>
+
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" placeholder="Введите Email" name="email" required>
+
+                    <label for="password"><b>Пароль</b></label>
+                    <input type="password" placeholder="Введите пароль" name="password" required>
+
+                    <label for="repeatPassword"><b>Повторите пароль</b></label>
+                    <input type="password" placeholder="Повторите пароль" name="repeatPassword" required>
+                    <hr>
+                    <button type="submit" class="registerbtn">Зарегистрироваться</button>
+                </div>
+                <div class="container signin">
+                    <p>Уже есть аккаунт? <a href="/front/views/authpage.ejs">Войди</a>.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('layout/footer.ejs')%>

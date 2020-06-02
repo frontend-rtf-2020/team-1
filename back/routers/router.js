@@ -4,27 +4,21 @@ const router = express.Router();
 
 const ejs = require('ejs');
 router.get('/', index);
-router.get('/authpage', authpage);
-router.get('/regpage', regpage);
+router.get('/authpage', (req, res) => {
+    res.render('authpage');
+  });
+
+router.get('/regpage', (req, res) => {
+    res.render('regpage');
+  });
 
 function index(req, res) {
     sess = req.session;
     if (!sess.email) {
         res.redirect('/authpage');
     } else {
-        const html = ejs.renderFile('../../front/views/index.ejs');
-        res.send(html);
+        res.render('index');
     }
-}
-
-function authpage(req, res) {
-    const html = ejs.renderFile('../../front/views/authpage.ejs');
-    res.send(html);
-}
-
-function regpage(req, res) {
-    const html = ejs.renderFile('../../front/views/regpage.ejs');
-    res.send(html);
 }
 
 module.exports = router;

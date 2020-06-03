@@ -1,10 +1,15 @@
 {
-    "plugins": ["node"],
+    "plugins": ["import"],
     "extends": [
         "eslint:recommended",
         "plugin:node/recommended",
         "prettier"
     ],
+    "env": {
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
     "parserOptions": {
         // Only ESLint 6.2.0 and later support ES2020.
         "ecmaVersion": 2020
@@ -19,6 +24,6 @@
         "node/prefer-global/url": ["error", "always"],
         "node/prefer-promises/dns": "error",
         "node/prefer-promises/fs": "error",
-        "no-console": 0
+        "no-console": "error"
     }
 }

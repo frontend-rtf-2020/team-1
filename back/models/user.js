@@ -11,6 +11,10 @@ const schema = new Schema({
         required: true,
         unique: true
     },
+    confirmed: {
+        type: DataTypes.String,
+        defaultValue: false
+    },
     password: {
         type: String,
         required: true

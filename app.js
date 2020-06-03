@@ -8,6 +8,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 const database = require('./back/database');
 const config = require('./config');
+const passport = require('passport');
+const expressSession = require('express-session');
 
 const apiRouter = require('./back/routers/api');
 const router = require('./back/routers/router');
@@ -20,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 app.use(session({
-  secret: "gobrrrrrrrrr",
+  secret: "secret",
   resave: false,
   saveUninitialized: false
 }));
@@ -29,6 +31,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(expressSession({secret: 'secret'}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.set('view engine', 'ejs');
 app.use('/api', apiRouter);

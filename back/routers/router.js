@@ -1,24 +1,31 @@
-const service = require('../service');
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 
-const ejs = require('ejs');
-router.get('/', index);
-router.get('/authpage', (req, res) => {
-    res.render('authpage');
-  });
+// router.get('/', index);
+router.get('/', (req, res) => {
+  res.render('authpage');
+});
 
 router.get('/regpage', (req, res) => {
-    res.render('regpage');
-  });
+  res.render('regpage');
+});
 
-function index(req, res) {
-    sess = req.session;
-    if (!sess.email) {
-        res.redirect('/authpage');
-    } else {
-        res.render('index');
-    }
-}
+router.post('/authpage', passport.authenticate('authpage', {
+  successRedirect: '/index',
+  failureRedirect: '/',
+  failureFlash: true
+}));
+
+// function index(req, res) {
+//   if (!sess.email) {
+//     res.locals.greeting = `Добро пожаловать!`;
+//     res.redirect('/authpage');
+//   } else {
+//     res.locals.greeting = `Добро пожаловать, ${username}!`;
+//     res.locals.action = "Выйти";
+//     res.render('index');
+//   }
+// }
 
 module.exports = router;

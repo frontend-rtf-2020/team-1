@@ -1,4 +1,5 @@
+  
 module.exports = {
     PORT: process.env.PORT || 3000,
-    MONGO_URL: 'mongodb://loclahost/blog'
-}
+    MONGO_URL: 'mongodb+srv://WiRus:virus19!@cluster0-j8yrh.mongodb.net/angermess?retryWrites=true&w=majority'
+  };

@@ -1,30 +1,31 @@
-const service = require('../service');
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 
-const ejs = require('ejs');
-router.get('/', index);
-router.get('/authpage', authpage);
-router.get('/regpage', regpage);
+// router.get('/', index);
+router.get('/', (req, res) => {
+  res.render('authpage');
+});
 
-function index(req, res) {
-    sess = req.session;
-    if (!sess.email) {
-        res.redirect('/authpage');
-    } else {
-        const html = ejs.renderFile('../../front/views/index.ejs');
-        res.send(html);
-    }
-}
+router.get('/regpage', (req, res) => {
+  res.render('regpage');
+});
 
-function authpage(req, res) {
-    const html = ejs.renderFile('../../front/views/authpage.ejs');
-    res.send(html);
-}
+router.post('/authpage', passport.authenticate('authpage', {
+  successRedirect: '/index',
+  failureRedirect: '/',
+  failureFlash: true
+}));
 
-function regpage(req, res) {
-    const html = ejs.renderFile('../../front/views/regpage.ejs');
-    res.send(html);
-}
+// function index(req, res) {
+//   if (!sess.email) {
+//     res.locals.greeting = `Добро пожаловать!`;
+//     res.redirect('/authpage');
+//   } else {
+//     res.locals.greeting = `Добро пожаловать, ${username}!`;
+//     res.locals.action = "Выйти";
+//     res.render('index');
+//   }
+// }
 
 module.exports = router;

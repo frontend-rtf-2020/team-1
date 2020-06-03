@@ -5,8 +5,16 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('laba3-api:server');
+var debug = require('debug')('team-1-api:server');
 var http = require('http');
+
+info => {
+  console.log(`Connected to ${info.host}:${info.port}/${info.name}`);
+  app.listen(config.PORT, () =>
+    console.log(`Example app listening on port ${config.PORT}!`)
+  );
+};
+
 
 /**
  * Get port from environment and store in Express.
@@ -14,7 +22,7 @@ var http = require('http');
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-console.log('CURRENT PORT:', port)
+console.log('CURRENT PORT:', port);
 
 /**
  * Create HTTP server.

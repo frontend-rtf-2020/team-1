@@ -1,4 +1,4 @@
-const service = require('../service');
+var service = require('../service');
 var express = require('express');
 var router = express.Router();
 

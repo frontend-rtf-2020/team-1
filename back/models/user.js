@@ -2,18 +2,27 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-    login: {
+    username: {
         type: String,
         required: true
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
+    },
+    confirmed: {
+        type: DataTypes.String,
+        defaultValue: false
     },
     password: {
         type: String,
         required: true
     }
-})
+});
 
-module.exports = mongoose.model('Post', schema)
+schema.set('toJSON', {
+    virtuals: true
+});
+
+module.exports = mongoose.model('User', schema, 'users');

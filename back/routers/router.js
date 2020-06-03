@@ -7,6 +7,10 @@ router.get('/', (req, res) => {
   res.render('authpage');
 });
 
+router.get('/authpage', (req, res) => {
+  res.render('authpage');
+});
+
 router.get('/regpage', (req, res) => {
   res.render('regpage');
 });

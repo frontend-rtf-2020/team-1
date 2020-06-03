@@ -85,12 +85,6 @@ function registration(req, res) {
       username: 'username'
     }).then(user => {
       if (!user) {
-        if (!user.confirmed) {
-          res.json({
-            Success: false,
-            message: 'На вашу почту выслано письмо с подтверждением регистрации'
-          });
-        } else {
           bcrypt.hash(password, 8, function (err, hash) {
             User.create({
               username,
@@ -99,10 +93,9 @@ function registration(req, res) {
             })
               .then(user => {
                 console.log(user);
-                mailer(message);
+                // mailer(message);
                 res.json({
                   Success: true,
-                  
                 });
               })
               .catch(err => {
@@ -113,7 +106,7 @@ function registration(req, res) {
                 });
               });
           });
-        }
+        
       } else {
         res.json({
           Success: false,
@@ -133,18 +126,19 @@ function logout(req, res) {
   });
 }
 
-const message = {
-  to: req.body.email,
-  subject: 'Подтверждение регистрации на сайте angermess',
-  text: `Здравствуте, ${req.body.username}
-  Чтобы активировать аккаунт, перейдите по ссылке:
-  https://localhost3000/confirm/3ad5ccdb-f605-40db-9146-2c6bf33877f0
-  Спасибо за то, что выбрали наш мессенджер!`
-}
-mailer(message);
-res.json({
-  Success: true
-});
+// const message = {
+//   to: req.body.email,
+//   subject: 'Подтверждение регистрации на сайте angermess',
+//   text: `Здравствуте, ${req.body.username}
+//   Чтобы активировать аккаунт, перейдите по ссылке:
+//   https://localhost3000/confirm/3ad5ccdb-f605-40db-9146-2c6bf33877f0
+//   Спасибо за то, что выбрали наш мессенджер!`
+// }
+
+// mailer(message);
+// res.json({
+//   Success: true
+// });
 
 module.exports = {
   authentication,

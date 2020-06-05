@@ -4,11 +4,11 @@ const transporter = nodemailer.createTransport(
     {
         host: 'smtp.mail.ru',
         port: 465,
-        secure: true, // true for 465, false for other ports
+        secure: true,
         auth: {
-            user: 'engermess@mail.ru',
-            pass: '1VvcNhZ3YuptkKZXwQ'
-        }
+        user: 'engermess@mail.ru',
+        pass: 'virus19!'
+    }
     },
     {
         from: 'Team Developers <engermess@mail.ru>',

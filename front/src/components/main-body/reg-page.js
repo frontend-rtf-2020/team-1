@@ -1,7 +1,9 @@
 import React from 'react';
-import './auth-reg-page';
+import '../main-body/auth-page.css';
 
 const RegPage = () => {
+    const ifError = false;
+    const Error = <p class="error">ошибка</p>;
     return (
         <div class="limiter">
             <div class="container-login">
@@ -13,8 +15,8 @@ const RegPage = () => {
                         <input type="password" id="register-password" name="password" placeholder="Введите пароль" />
                         <input type="password" id="register-repeatpassword" name="repeatpassword" placeholder="Повторите пароль" />
                         <button type="submit" id="register-button">&#xf0da;</button>
-                        <p class="error">ошибка</p>
-                        <p>Уже есть аккаунт? <a href="authpage">Войди</a></p>
+                        { ifError ? Error : null }
+                        <p>Уже есть аккаунт? <a href="./authpage">Войди</a></p>
                     </form>
                 </div>
             </div>

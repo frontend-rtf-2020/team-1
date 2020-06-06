@@ -1,12 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css');
-@import url('/fonts/Orbitron-ExtraBold.ttf');
+/* @import url('./Orbitron-ExtraBold.ttf');
 @font-face {
   font-family: "Orbitron-ExtraBold"; 
-  src: url("../../public/fonts/Orbitron-ExtraBold.ttf") format("truetype"); 
+  src: url("./Orbitron-ExtraBold.ttf") format("truetype"); 
   font-style: normal; 
   font-weight: normal; 
-  } 
+  }   */
 
   .header {
     overflow: hidden;
@@ -28,12 +28,13 @@
   .header a.logo {
     font-size: 40px;
     font-weight: bold;
-    font-family: "Orbitron-ExtraBold";
+    /* font-family: "Orbitron-ExtraBold"; */
   }
   
   .header a.active{
     background-color: #020202;
     color: white;
+    margin-left: 10px;
   }
   
   .header-right {
@@ -52,6 +53,6 @@
   }
   
   .container {
-    padding: 10px;
+    padding: 0px;
   }
   

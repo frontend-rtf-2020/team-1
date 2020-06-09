@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+import React from 'react';
+
+import Messenger from './messenger';
+import AuthPage from './auth-page';
+
+const MainBody = () => {
+  const isLoggedIn = true;
+  return (
+    <div className="mainbody">
+      {isLoggedIn ? <Messenger /> : <AuthPage />}
+    </div>
+  );
+};
+
+=======
 import React from 'react';
 
 import Messenger from './messenger';
@@ -12,4 +28,5 @@ const MainBody = () => {
     );
   };
   
+>>>>>>> master
 export default MainBody;

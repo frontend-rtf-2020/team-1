@@ -11,11 +11,21 @@ const config = require('./config');
 const passport = require('passport');
 const expressSession = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+var cors = require("cors");
 
 const apiRouter = require('./routers/api');
 const router = require('./routers/router');
 
 const app = express();
+const server = require('http').createServer(app);  
+const io = require('socket.io')(server);
+
+io.on('connection', function(client) {
+  console.log('Client connected...');
+  client.on('join', function(data) {
+     console.log(data);
+  });
+});
 
 //middleware for bodyparser, cookie, session
 app.use(bodyParser.json());
@@ -33,6 +43,7 @@ app.use(
   })
 );
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -61,6 +72,7 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.send(`<p1>Error</p1>,<p>${err.message}</p>`);
 });
+
 
 database()
   .then(info => {

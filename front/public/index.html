@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no" />
+  <link rel="icon" href="/favicon.ico" />
+  <title>Engermess</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io.connect('http://localhost');
+    socket.on('connect', function (data) {
+      socket.emit('join', 'Hello World from client');
+      alert(data);
+    });
+  </script>
+</head>
+
+<body style="background-image: url('/images/background.jpg');">
+  <div role="main" id="root" class="container"></div>
+</body>
+
+</html>

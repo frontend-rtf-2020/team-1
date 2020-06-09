@@ -2,8 +2,8 @@
     "name": "angermess",
     "version": "0.1.0",
     "scripts": {
-        "start": "node ./back/bin/www",
-        "postinstall": "npm install --prefix front && npm install --prefix back",
-        "build": "npm run build --prefix front"
+      "postinstall": "npm install --prefix front && npm install --prefix back",
+      "build": "npm run build --prefix front",
+      "start": "node ./back/bin/www"
     }
-}
+  }

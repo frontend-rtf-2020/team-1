@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 
 import ContactsPanel from './contacts-panel';
@@ -15,16 +14,4 @@ const Messenger = () => {
     );
   };
   
-=======
-import React from 'react';
-
-import './messenger.css';
-
-const Messenger = () => {
-    return (
-      <div>Ку-ку</div>
-    );
-  };
-  
->>>>>>> master
 export default Messenger;

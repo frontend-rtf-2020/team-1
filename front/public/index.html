@@ -4,17 +4,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no" />
-  <link rel="icon" href="/favicon.ico" />  
-<<<<<<< HEAD
-=======
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
->>>>>>> master
+  <link rel="icon" href="/favicon.ico" />
   <title>Engermess</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io.connect('http://localhost');
+    socket.on('connect', function (data) {
+      socket.emit('join', 'Hello World from client');
+      alert(data);
+    });
+  </script>
 </head>
 
 <body style="background-image: url('/images/background.jpg');">
-  <div role="main" id="root" class="container" ></div>
+  <div role="main" id="root" class="container"></div>
 </body>
 
 </html>

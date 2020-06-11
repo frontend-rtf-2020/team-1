@@ -80,7 +80,7 @@ h1{
 	outline: 0;
 	z-index: 2;
 	top: 19px;
-	right: -24px;
+	right: -5px;
 	border: 6px solid rgb(52, 56, 61);
 	font-size: 25px;
 	text-indent: 0px;
@@ -109,7 +109,7 @@ h1{
 }
 #form p.error {
 	background-color: rgba(180, 67, 52, 0.808);
-	width: 260px;
+	width: 280px;
 	color: rgb(241, 194, 194);
 	border-color: teal;
 	border-width: medium;

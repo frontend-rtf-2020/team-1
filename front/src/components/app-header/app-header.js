@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import AuthPage from '../main-body/auth-page';
 import './app-header.css';
 
 export default class AppHeader extends Component {

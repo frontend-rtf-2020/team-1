@@ -42,7 +42,7 @@ export default class RegPage extends Component {
             emailError = "Неправильный email";
         }
 
-        if (this.state.password != this.state.repeatpassword) {
+        if (this.state.password !== this.state.repeatpassword) {
             repeatpasswordError = "Пароли не совпадают";
         }
 

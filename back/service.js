@@ -8,11 +8,11 @@ const mailer = require('./nodemailer');
  * @param {string} password - пароль
  */
 function authentication(req, res) {
-  const { email, password } = req.body;
-  const mail = req.body.email;
-  const passw = req.body.password;
+  // const { email, password } = req.body;
+  // const mail = req.body.email;
+  // const passw = req.body.password;
 
-  if (!mail || !passw) {
+  if (!email || !password) {
     res.json({
       Success: false,
       error: 'Все поля должны быть заполнены!',
@@ -55,26 +55,16 @@ function authentication(req, res) {
 };
 
 function registration(req, res) {
-  const { username, email, password, repeatpassword } = req.body;
-  console.log(req.body);
+  // const { username, email, password, repeatpassword } = req.body;
+  // console.log(req.body);
   if (!username || !email || !password || !repeatpassword) {
     res.json({
       Success: false,
       error: 'Все поля должны быть заполнены!'
     });
-  } else if (username.length < 3 || username.length > 16) {
-    res.json({
-      Success: false,
-      error: 'Длина логина от 3 до 16 символов!',
-    });
-  } else if (password !== repeatpassword) {
-    res.json({
-      Success: false,
-      error: 'Пароли не совпадают!',
-    });
   } else {
     User.findOne({
-      username: 'username'
+      email: 'email'
     }).then(user => {
       if (!user) {
         bcrypt.hash(password, 8, function (err, hash) {
@@ -123,7 +113,7 @@ function logout(req, res) {
     if (err) {
       return console.log(err);
     }
-    res.redirect('/');
+    res.redirect('/authpage');
   });
 }
 

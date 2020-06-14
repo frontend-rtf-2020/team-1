@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import '../main-body/auth-page.css';
 
 const initialState = {
@@ -10,6 +12,7 @@ const initialState = {
     emailError: "",
     passwordError: "",
     repeatpasswordError: "",
+    checkRegistration: ""
 };
 
 
@@ -29,7 +32,6 @@ export default class RegPage extends Component {
         let blankFieldsError = "";
         let usernameError = "";
         let emailError = "";
-        // let passwordError = "";
         let repeatpasswordError = "";
         if (!this.state.username || !this.state.email || !this.state.password || !this.state.repeatpassword) {
             blankFieldsError = "Все поля должны быть заполнены!";
@@ -58,26 +60,31 @@ export default class RegPage extends Component {
         const isValid = this.validate();
         if (isValid) {
             console.log(this.state);
-            // axios
-            //     .post(
-            //         "http://localhost:3001/registrations",
-            //         {
-            //             user: {
-            //                 email: email,
-            //                 password: password,
-            //                 password_confirmation: password_confirmation
-            //             }
-            //         },
-            //         { withCredentials: true }
-            //     )
-            //     .then(response => {
-            //         if (response.data.status === "created") {
-            //             this.props.handleSuccessfulAuth(response.data);
-            //         }
-            //     })
-            //     .catch(error => {
-            //         console.log("registration error", error);
-            //     });
+            const { username, email, password, repeatpassword } = this.state;
+            axios
+                .post(
+                    "/api/reg",
+                    {
+                        username: username,
+                        email: email,
+                        password: password,
+                        repeatpassword: repeatpassword
+                    },
+                    { withCredentials: true }
+                )
+                .then(response => {
+                    console.log(response.data);
+                    if (response.data.Success === true){
+                        let checkRegistration = "Вы успешно зарегистрировались. Войдите в аккаунт";
+                        this.setState({checkRegistration});
+                    } else {
+                        let checkRegistration = "Email уже занят";
+                        this.setState({checkRegistration});
+                    }
+                })
+                .catch(error => {
+                    console.log("registration error", error);
+                });
             this.setState(initialState);
         }
     };
@@ -128,6 +135,9 @@ export default class RegPage extends Component {
                             </p>
                             <p class="error">
                                 {this.state.repeatpasswordError}
+                            </p>
+                            <p class="error">
+                                {this.state.checkRegistration}
                             </p>
                             <button type="submit" id="register-button">&#xf0da;</button>
                             <p>Уже есть аккаунт? <a href="./authpage">Войди</a></p>

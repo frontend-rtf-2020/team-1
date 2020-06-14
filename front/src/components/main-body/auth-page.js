@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import './auth-page.css';
 
@@ -7,7 +8,7 @@ const initialState = {
     password: "",
     emailError: "",
     passwordError: "",
-    user: null
+    isLoggedIn: false
 };
 
 export default class AuthPage extends Component {
@@ -46,25 +47,32 @@ export default class AuthPage extends Component {
         const isValid = this.validate();
         if (isValid) {
             console.log(this.state);
-            // axios
-            //     .post(
-            //         "/api/auth",
-            //         {
-            //             user: {
-            //                 email: email,
-            //                 password: password
-            //             }
-            //         },
-            //         { withCredentials: true }
-            //     )
-            //     .then(response => {
-            //         if (response.data.logged_in) {
-            //             this.props.handleSuccessfulAuth(response.data);
-            //         }
-            //     })
-            //     .catch(error => {
-            //         console.log("login error", error);
-            //     });
+            const { email, password } = this.state;
+            axios
+                .post(
+                    "/api/auth",
+                    {
+                        email: email,
+                        password: password
+                    },
+                    { withCredentials: true }
+                )
+                .then(response => {
+                    console.log(response.data);
+                    if (response.data.Success === true){
+                        let isLoggedIn = true;
+                        this.setState({isLoggedIn});
+                        console.log(isLoggedIn);
+                        
+                    } else {
+                        let passwordError = "Неверный email или пароль";
+                        this.setState({passwordError});
+                    }
+                })
+                .catch(error => {
+                    console.log("login error", error);
+                });
+            event.preventDefault();
             this.setState(initialState);
         }
     };

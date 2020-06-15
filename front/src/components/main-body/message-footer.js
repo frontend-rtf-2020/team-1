@@ -1,23 +1,51 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import './messenger.css';
 
-const MessageFooter = () => {
+export default class MessageFooter extends Component {
 
-    return (
-        <div class="message__footer">
-            <div class="message__footer-menu">
-                <i class="fa fa-gift fa-lg"> </i>
-                <i class="fa fa-camera fa-lg"></i>
-                <i class="fa fa-microphone fa-lg"></i>
-                <i class="fa fa-smile-o fa-lg"></i>
+    state = {
+        label: ''
+    };
+
+    onLabelChange = (event) => {
+        this.setState({
+            label: event.target.value
+        })
+    };
+
+    onSubmit = (event) => {
+        event.preventDefault();
+        const { label } = this.state;
+        this.setState({ label: '' });
+        const cb = this.props.onMessageAdded || (() => { });
+        cb(label);
+        console.log('kva');
+    };
+
+    render() {
+        return (
+            <div className="message__footer">
+                <div class="message__footer-menu">
+                    <i class="fa fa-gift fa-lg"> </i>
+                    <i class="fa fa-camera fa-lg"></i>
+                    <i class="fa fa-microphone fa-lg"></i>
+                    <i class="fa fa-smile-o fa-lg"></i>
+                </div>
+                <form
+                    className="message__footer-message"
+                    onSubmit={this.onSubmit}>
+                    <input
+                        type="text"
+                        placeholder="Написать сообщение..."
+                        onChange={this.onLabelChange}
+                        value={this.state.label}>
+                    </input>
+                    <buton
+                        type="submit"
+                        className="fa fa-paper-plane fa-lg"></buton>
+                </form>
             </div>
-            <div class="message__footer-message">
-                <input type="text" placeholder="Написать сообщение..."></input>
-                <i class="fa fa-paper-plane fa-lg"></i>   
-            </div>
-        </div>
-    );
+        );
+    }
 };
-
-export default MessageFooter;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import '../main-body/auth-page.css';
+import '../main-body/auth-reg-page.css';
 
 const initialState = {
     username: "",
@@ -105,25 +105,29 @@ export default class RegPage extends Component {
                                 id="register-username"
                                 name="username"
                                 placeholder="Введите имя"
-                                onChange={this.handleChange} />
+                                onChange={this.handleChange} 
+                                value={this.state.username}/>
                             <input
                                 type="text"
                                 id="register-email"
                                 name="email"
                                 placeholder="Введите Email"
-                                onChange={this.handleChange} />
+                                onChange={this.handleChange} 
+                                value={this.state.email}/>
                             <input
                                 type="password"
                                 id="register-password"
                                 name="password"
                                 placeholder="Введите пароль"
-                                onChange={this.handleChange} />
+                                onChange={this.handleChange} 
+                                value={this.state.password}/>
                             <input
                                 type="password"
                                 id="register-repeatpassword"
                                 name="repeatpassword"
                                 placeholder="Повторите пароль"
-                                onChange={this.handleChange} />
+                                onChange={this.handleChange} 
+                                value={this.state.repeatpassword}/>
                             <p class="error">
                                 {this.state.blankFieldsError}
                             </p>
@@ -136,7 +140,7 @@ export default class RegPage extends Component {
                             <p class="error">
                                 {this.state.repeatpasswordError}
                             </p>
-                            <p class="error">
+                            <p class="error" value={this.state.checkRegistration} >
                                 {this.state.checkRegistration}
                             </p>
                             <button type="submit" id="register-button">&#xf0da;</button>

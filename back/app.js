@@ -8,10 +8,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const database = require('./database');
 const config = require('./config');
-const passport = require('passport');
-const expressSession = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-var cors = require("cors");
 
 const apiRouter = require('./routers/api');
 const router = require('./routers/router');
@@ -20,10 +17,10 @@ const app = express();
 const server = require('http').createServer(app);  
 const io = require('socket.io')(server);
 
-io.on('connection', function(client) {
-  console.log('Client connected...');
-  client.on('join', function(data) {
-     console.log(data);
+io.on('connection', (socket) => {
+  socket.on('ROOM:JOIN', () => {
+    console.log('Boo!')
+    socket.to('roomId').broadcast.emit('ROOM:SET_USERS', 'users');
   });
 });
 
@@ -43,20 +40,14 @@ app.use(
   })
 );
 
-app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(expressSession({secret: 'secret'}));
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use('/api', apiRouter);
 app.use(express.static(path.join(__dirname, '../front/public')));
 app.use(router);
-//app.set('views', './front/views');
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
-import './auth-page.css';
+import './auth-reg-page.css';
 
 const initialState = {
     email: "",
     password: "",
     emailError: "",
-    passwordError: "",
-    isLoggedIn: false
+    passwordError: ""
 };
 
-export default class AuthPage extends Component {
+class AuthPage extends Component {
     state = initialState;
 
     handleChange = event => {
@@ -47,6 +47,7 @@ export default class AuthPage extends Component {
         const isValid = this.validate();
         if (isValid) {
             console.log(this.state);
+            const { history, handleLogin } = this.props
             const { email, password } = this.state;
             axios
                 .post(
@@ -59,14 +60,13 @@ export default class AuthPage extends Component {
                 )
                 .then(response => {
                     console.log(response.data);
-                    if (response.data.Success === true){
-                        let isLoggedIn = true;
-                        this.setState({isLoggedIn});
-                        console.log(isLoggedIn);
-                        
+                    if (response.data.Success === true) {
+                        handleLogin().then(() => {
+                             history.push('/')
+                        });
                     } else {
                         let passwordError = "Неверный email или пароль";
-                        this.setState({passwordError});
+                        this.setState({ passwordError });
                     }
                 })
                 .catch(error => {
@@ -93,13 +93,15 @@ export default class AuthPage extends Component {
                             d="login-email"
                             name="email"
                             placeholder="Введите Email"
-                            onChange={this.handleChange} />
+                            onChange={this.handleChange} 
+                            value={this.state.email}/>
                         <input
                             type="password"
                             id="login-password"
                             name="password"
                             placeholder="Введите пароль"
-                            onChange={this.handleChange} />
+                            onChange={this.handleChange}
+                            value={this.state.password} />
                         <p class="error">
                             {this.state.emailError}
                         </p>
@@ -118,3 +120,5 @@ export default class AuthPage extends Component {
         );
     }
 }
+
+export default withRouter(AuthPage)

@@ -8,9 +8,7 @@ const mailer = require('./nodemailer');
  * @param {string} password - пароль
  */
 function authentication(req, res) {
-  // const { email, password } = req.body;
-  // const mail = req.body.email;
-  // const passw = req.body.password;
+  const { email, password } = req.body;
 
   if (!email || !password) {
     res.json({
@@ -37,6 +35,7 @@ function authentication(req, res) {
             } else {
               req.session.userId = user.id;
               req.session.useremail = user.email;
+              console.log(req.session);
               res.json({
                 Success: true
               });
@@ -55,8 +54,8 @@ function authentication(req, res) {
 };
 
 function registration(req, res) {
-  // const { username, email, password, repeatpassword } = req.body;
-  // console.log(req.body);
+  const { username, email, password, repeatpassword } = req.body;
+  console.log(req.body);
   if (!username || !email || !password || !repeatpassword) {
     res.json({
       Success: false,
@@ -80,8 +79,6 @@ function registration(req, res) {
                 subject: 'Подтверждение регистрации на сайте angermess',
                 text: `
                 Здравствуте, ${req.body.username}
-                Чтобы активировать аккаунт, перейдите по ссылке:
-                https://localhost3000/confirm/3ad5ccdb-f605-40db-9146-2c6bf33877f0
                 Спасибо за то, что выбрали наш мессенджер!`
               }
               mailer(message);
@@ -117,22 +114,25 @@ function logout(req, res) {
   });
 }
 
-// const message = {
-//   to: req.body.email,
-//   subject: 'Подтверждение регистрации на сайте angermess',
-//   text: `Здравствуте, ${req.body.username}
-//   Чтобы активировать аккаунт, перейдите по ссылке:
-//   https://localhost3000/confirm/3ad5ccdb-f605-40db-9146-2c6bf33877f0
-//   Спасибо за то, что выбрали наш мессенджер!`
-// }
+function getCurrentUserData(req, res) {
+  // const sess = req.session;
+  // const userId = req.session.userId;
+  // // const username = req.session.username;
+  // const useremail = req.session.useremail;
+  // console.log(sess);
+  res.json({ email: "useremail", username: "кое-кто" });
+}
 
-// mailer(message);
-// res.json({
-//   Success: true
-// });
+function searchUsers(req, res) {
+  const toSearch = req.body.searchPanel;
+  User.find(toSearch)
+    .then(res.json({toSearch}));
+}
 
 module.exports = {
   authentication,
   registration,
-  logout
+  logout,
+  getCurrentUserData,
+  searchUsers
 }

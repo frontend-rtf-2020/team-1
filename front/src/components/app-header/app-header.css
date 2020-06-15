@@ -14,7 +14,7 @@
     padding: 10px 10px;
     opacity: 80%;
   }
-  .header a, p {
+  .header a, p, button {
     float: left;
     color: black;
     text-align: center;
@@ -31,7 +31,7 @@
     /* font-family: "Orbitron-ExtraBold"; */
   }
   
-  .header a.active{
+  .header a.active, button{
     background-color: #020202;
     color: white;
     margin-left: 10px;

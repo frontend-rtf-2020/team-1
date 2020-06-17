@@ -22,7 +22,7 @@ export default class ContactsPanel extends Component {
       { id: 1, label: 'Боря' },
       { id: 2, label: 'Жора' },
       { id: 3, label: 'Рита' },
-      { id: 1, label: 'Боря' }
+      { id: 4, label: 'Боря' }
     ],
     term: ''
   }
@@ -33,7 +33,7 @@ export default class ContactsPanel extends Component {
     }
     return items.filter((item) => {
       return item.label
-        .toLowerCase.indexOf(term.toLowerCase) > -1;
+        .toLowerCase().indexOf(term.toLowerCase()) > -1;
     });
   }
 
@@ -51,9 +51,9 @@ export default class ContactsPanel extends Component {
   };
 
   render() {
-    const { items, search, term } = this.state;
+    const { items, term } = this.state;
     const foundedUsers = this.search(items, term);
-    const elements = items.map((item) => {
+    const elements = foundedUsers.map((item) => {
       const { id, ...itemProps } = item;
       return (
         <li key={id} >

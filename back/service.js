@@ -1,6 +1,7 @@
 const User = require('./models/user');
 const bcrypt = require('bcryptjs');
 const mailer = require('./nodemailer');
+const Dialog = require('./models/dialog-schema');
 
 /**
  * @param {string} username - имя пользователя
@@ -110,23 +111,65 @@ function logout(req, res) {
     if (err) {
       return console.log(err);
     }
+    res.clearCookie('connect.sid', { path: '/' });
     res.redirect('/authpage');
   });
 }
 
 function getCurrentUserData(req, res) {
-  // const sess = req.session;
-  // const userId = req.session.userId;
-  // // const username = req.session.username;
-  // const useremail = req.session.useremail;
-  // console.log(sess);
-  res.json({ email: "useremail", username: "кое-кто" });
+  req.session.reload((err) => {
+    const userId = req.session.userId;
+    User.findById(userId).exec((err, user) => {
+      if (!err && user) {
+        res.json({ email: user.email, username: user.username });
+      } else {
+        console.log(err);
+        res.status(404).end();
+      }
+    })
+  });
+}
+
+function getUserDialogs(req, res) {
+  req.session.reload((err) => {
+    const currentUserId = req.session.userId;
+    Dialog.find({}).or([{fromUser: currentUserId}, {toUser: currentUserId}])
+    .then((dialogs) => res.json(dialogs));
+  })
+}
+
+const convertUser = (user) => {
+  return {
+    id: user.id,
+    username: user.username,
+    email: user.email
+  }
 }
 
 function searchUsers(req, res) {
-  const toSearch = req.body.searchPanel;
-  User.find(toSearch)
-    .then(res.json({toSearch}));
+  if (req.query.search) {
+    User.find({ username: new RegExp(req.query.search, "i") })
+      .then((users) => res.json(users.map(convertUser)));
+  } else {
+    User.find({})
+      .then((users) => res.json(users.map(convertUser)));
+  }
+}
+
+function createDialog(req, res) {
+  if (req.query.userId) {
+    req.session.reload((err) => {
+      const currentUserId = req.session.userId;
+      const dialog = {
+        fromUser: currentUserId,
+        toUser: req.query.userId
+      }
+      Dialog.findOneAndUpdate(dialog, dialog, { upsert: true })
+        .then(res.status(200).end())
+    })
+  } else {
+    res.status(400).end();
+  }
 }
 
 module.exports = {
@@ -134,5 +177,7 @@ module.exports = {
   registration,
   logout,
   getCurrentUserData,
-  searchUsers
+  searchUsers,
+  createDialog,
+  getUserDialogs
 }

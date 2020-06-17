@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import socket from '../../socket';
 
 import MessageHeader from './message-header';
 import MessageFooter from './message-footer';
@@ -19,19 +18,19 @@ const MessageItemRecieve = ({ label }) => {
     );
 };
 
-const MessageItemSend = ({ label }) => {
-    return (
-        <li class="message__container-item left">
-            <div className="message__item">
-                Боря:
-            </div>
-            <div className="message__item-text">
-                <p>{label}</p>
-            </div>
-            <div className="message__item-time">11:45</div>
-        </li>
-    );
-};
+// const MessageItemSend = ({ label }) => {
+//     return (
+//         <li class="message__container-item left">
+//             <div className="message__item">
+//                 Боря:
+//             </div>
+//             <div className="message__item-text">
+//                 <p>{label}</p>
+//             </div>
+//             <div className="message__item-time">11:45</div>
+//         </li>
+//     );
+// };
 
 export default class MessagePanel extends Component {
     maxId = 100;

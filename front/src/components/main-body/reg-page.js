@@ -90,15 +90,15 @@ export default class RegPage extends Component {
     };
     render() {
         return (
-            <div class="limiter">
-                <div class="container-login">
+            <div className="limiter">
+                <div className="container-login">
                     <div id="wrapper">
                         <h1>Создать аккаунт</h1>
                         <form
                             id="form"
                             method="post"
                             // action="/api/reg"
-                            autocomplete="off"
+                            autoComplete="off"
                             onSubmit={this.handleSubmit}>
                             <input
                                 type="text"
@@ -128,19 +128,19 @@ export default class RegPage extends Component {
                                 placeholder="Повторите пароль"
                                 onChange={this.handleChange} 
                                 value={this.state.repeatpassword}/>
-                            <p class="error">
+                            <p className="error">
                                 {this.state.blankFieldsError}
                             </p>
-                            <p class="error">
+                            <p className="error">
                                 {this.state.emailError}
                             </p>
-                            <p class="error">
+                            <p className="error">
                                 {this.state.usernameError}
                             </p>
-                            <p class="error">
+                            <p className="error">
                                 {this.state.repeatpasswordError}
                             </p>
-                            <p class="error" value={this.state.checkRegistration} >
+                            <p className="error" value={this.state.checkRegistration} >
                                 {this.state.checkRegistration}
                             </p>
                             <button type="submit" id="register-button">&#xf0da;</button>

@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import socket from './socket';
 
-import reducer from './reducer';
 import AppHeader from './components/app-header/app-header';
 import Messenger from './components/main-body/messenger';
 import AuthPage from './components/main-body/auth-page';
@@ -24,6 +23,7 @@ export default class App extends Component {
       })
       .catch(error => {
         console.log("login error", error);
+        this.setState({userChecked: true });
       });
   }
 
@@ -35,7 +35,7 @@ export default class App extends Component {
 
   handleLogout = () => {
     axios
-      .post(
+      .get(
         "/api/logout"
       )
       .then(() => {

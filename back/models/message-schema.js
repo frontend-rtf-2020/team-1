@@ -16,14 +16,10 @@ const messageSchema = new Schema({
       require: Boolean
     },
     sendDate: Date,
-    status: {
-      type: Boolean,
-      default: false
-    }
   });
 
 schema.set('toJSON', {
   virtuals: true
 });
 
-module.exports = messagesDB.model('Message', messages);
+module.exports = mongoose.model('Message',  messageSchema, 'messages');

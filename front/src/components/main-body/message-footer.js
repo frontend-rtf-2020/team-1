@@ -41,9 +41,9 @@ export default class MessageFooter extends Component {
                         onChange={this.onLabelChange}
                         value={this.state.label}>
                     </input>
-                    <buton
+                    <button
                         type="submit"
-                        className="fa fa-paper-plane fa-lg"></buton>
+                        className="fa fa-paper-plane fa-lg"></button>
                 </form>
             </div>
         );

@@ -12,6 +12,10 @@ li {
     text-decoration: none;
     list-style: none;
 }
+button {
+    background-color: transparent;
+    border-color: transparent;
+}
 .section {
     position: absolute;
     top: 56%;

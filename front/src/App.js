@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
-import socket from './socket';
 
 import AppHeader from './components/app-header/app-header';
 import Messenger from './components/main-body/messenger';
@@ -19,28 +18,26 @@ export default class App extends Component {
     return axios
       .get("/api/currentuser")
       .then(response => {
-        this.setState({ user: response.data , userChecked: true });
+        this.setState({ user: response.data, userChecked: true });
       })
       .catch(error => {
         console.log("login error", error);
-        this.setState({userChecked: true });
+        this.setState({ userChecked: true });
       });
   }
 
   handleLogin = async () => {
-    this.setState({ userChecked: false})
-    this.fetchUser()
-    socket.emit('ROOM:JOIN', {});
+    this.setState({ userChecked: false });
+    this.fetchUser();
   }
 
   handleLogout = () => {
+    this.setState({ userChecked: false });
     axios
-      .get(
-        "/api/logout"
-      )
+      .get("/api/logout")
       .then(() => {
-        this.setState({ user: null });
-        socket.emit('ROOM:JOIN', {});
+        console.log('logout then')
+        this.setState({ user: null,  userChecked: true });
       })
       .catch(error => {
         console.log("logout error", error);
@@ -53,48 +50,8 @@ export default class App extends Component {
 
   render() {
     const { user, userChecked } = this.state;
-    // const [state, dispatch] = React.useReducer(reducer, {
-    //   joined: false,
-    //   roomId: null,
-    //   userName: null,
-    //   users: [],
-    //   messages: [],
-    // });
 
-    // const onLogin = async (obj) => {
-    //   dispatch({
-    //     type: 'JOINED',
-    //     payload: obj,
-    //   });
-    //   socket.emit('ROOM:JOIN', obj);
-    //   const { data } = await axios.get(`/rooms/${obj.roomId}`);
-    //   dispatch({
-    //     type: 'SET_DATA',
-    //     payload: data,
-    //   });
-    // };
-
-    // const setUsers = (users) => {
-    //   dispatch({
-    //     type: 'SET_USERS',
-    //     payload: users,
-    //   });
-    // };
-
-    // const addMessage = (message) => {
-    //   dispatch({
-    //     type: 'NEW_MESSAGE',
-    //     payload: message,
-    //   });
-    // };
-
-    // React.useEffect(() => {
-    //   socket.on('ROOM:SET_USERS', setUsers);
-    //   socket.on('ROOM:NEW_MESSAGE', addMessage);
-    // }, []);
-
-    // window.socket = socket;
-
+    console.log('render')
     return (
       <Router>
         <div className="messenger">

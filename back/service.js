@@ -133,8 +133,26 @@ function getCurrentUserData(req, res) {
 function getUserDialogs(req, res) {
   req.session.reload((err) => {
     const currentUserId = req.session.userId;
-    Dialog.find({}).or([{fromUser: currentUserId}, {toUser: currentUserId}])
-    .then((dialogs) => res.json(dialogs));
+    const convertDialog = ({ id, fromUser, toUser }) => {
+      const user = fromUser.id === currentUserId ? toUser : fromUser;
+      return {
+        id: id,
+        user: convertUser(user)
+      }
+    };
+
+    Dialog.find({}).or([{ fromUser: currentUserId }, { toUser: currentUserId }])
+      .populate('fromUser')
+      .populate('toUser')
+      .then((dialogs) => {
+        if (req.query.search) {
+          const result = dialogs.map(convertDialog)
+            .filter((dialog) => dialog.user.username.indexOf(req.query.search) > -1);
+          return res.json(result);
+        } else {
+          return res.json(dialogs.map(convertDialog))
+        }
+      });
   })
 }
 

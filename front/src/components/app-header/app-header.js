@@ -11,7 +11,7 @@ export default class AppHeader extends Component {
         const Logged = <span>
             <a href="/" class="logAction">{greeting} </a>
             <button
-                class="active"
+                className="active"
                 onClick={handleLogout}
                 href="/authpage">Выйти
             </button>

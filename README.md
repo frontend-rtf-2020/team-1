@@ -1,7 +1,7 @@
 # team-1
 Представляем проект мессенджера angermess
 
-[Проект на heroku](https://angermess.heroku.app/)
+[Проект на heroku](https://angermess.herokuapp.com/)
 
 На данный момент реализовано:
  - Форма регистрации, авторизации (по email, login, pass – на почту приходит письмо)

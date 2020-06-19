@@ -57,9 +57,22 @@ export default class ContactsPanel extends Component {
               onChange={this.onTermChange}></input>
           </div>
         </div>
-        <div className="contacts_message">
+        <div>
           <ul className="contacts-list">
-            {rosterMode ? <DialogsList term={term} /> : <UsersList term={term} />}
+            {rosterMode ?
+              <div>
+                <div
+                  className="start-dialog-message">
+                  {!this.state.dialogs ? <h2>У вас еще нет начатых диалогов. Нажмите &#10010;, чтобы найти пользователя</h2> : null}
+                </div>
+                <DialogsList term={term} />
+              </div> :
+              <div>
+                <div className="start-dialog-message">
+                  {!term ? <h2>Введите имя пользователя в строку поиска</h2> : null}
+                </div>
+                <UsersList term={term} />
+              </div>}
           </ul>
         </div>
       </div>

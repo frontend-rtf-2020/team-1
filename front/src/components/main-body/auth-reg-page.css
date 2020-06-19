@@ -98,7 +98,7 @@ h1{
 	padding: 0 20px;
 	font-weight: 700;
 	font-size: 12px;
-	margin: 5px 0 0 0;
+	margin: 2px 0 0 0;
 }
 #form p > a{
 	color: whitesmoke;
@@ -109,7 +109,7 @@ h1{
 }
 #form p.error {
 	background-color: rgba(180, 67, 52, 0.808);
-	width: 260px;
+	width: 280px;
 	color: rgb(241, 194, 194);
 	border-color: teal;
 	border-width: medium;

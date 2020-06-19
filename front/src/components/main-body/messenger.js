@@ -10,7 +10,7 @@ export default class Messenger extends Component {
   render() {
     const {user} = this.props;
     return (
-      <section class="section">
+      <section className="section">
         {user ? null :  <Redirect to="/authpage" />}
         <ContactsPanel />
         <MessagePanel />

@@ -34,10 +34,10 @@ export default class DialogsList extends Component {
     render() {
         const elements = this.state.dialogs
             .map((dialog) => {
-                return (
-                    <li key={dialog.id} >
-                        <DialogsListItem dialog={dialog} />
-                    </li>
+                return (         
+                        <li key={dialog.id} >
+                            <DialogsListItem dialog={dialog} />
+                        </li>
                 )
             })
         return <ul>{elements}</ul>;

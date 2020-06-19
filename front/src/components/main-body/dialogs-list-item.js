@@ -2,7 +2,7 @@ import React from 'react';
 
 import './messenger.css';
 
-const DialogsListItem = ({ dialog, loadDialog }) => {
+const DialogsListItem = ({ dialog, loadDialog, dialogs }) => {
   return (
     <div
       className="contacts__item"

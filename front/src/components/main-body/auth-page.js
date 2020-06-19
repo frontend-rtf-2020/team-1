@@ -79,7 +79,7 @@ class AuthPage extends Component {
 
     render() {
         return (
-            <div class="limiter">
+            <div className="limiter">
                 <div id="wrapper">
                     <h1>Войти</h1>
                     <form
@@ -87,7 +87,7 @@ class AuthPage extends Component {
                         method="post"
                         // action="/api/auth"
                         onSubmit={this.handleSubmit}
-                        autocomplete="off">
+                        autoComplete="off">
                         <input
                             type="text"
                             d="login-email"
@@ -102,16 +102,16 @@ class AuthPage extends Component {
                             placeholder="Введите пароль"
                             onChange={this.handleChange}
                             value={this.state.password} />
-                        <p class="error">
+                        <p className="error">
                             {this.state.emailError}
                         </p>
-                        <p class="error">
+                        <p className="error">
                             {this.state.passwordError}
                         </p>
                         <button type="submit" id="login-button" >&#xf0da;</button>
                         <p>Нет аккаунта?
                         <a href="./regpage"
-                                class="switch-button"
+                                className="switch-button"
                             >   Зарегистрируйся</a>
                         </p>
                     </form>

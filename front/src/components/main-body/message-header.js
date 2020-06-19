@@ -1,26 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import './messenger.css';
 
-const MessageHeader = () => {
+export default class MessageHeader extends Component {
 
-    return (
-        <div class="message__header">
-            <div class="message__header-info">
-                <div class="message__header-avatar">
-                    <img src="test.png" alt=""></img>
+    render() {
+        const {withInterlocutor} = this.props;
+        const interlocutor =
+            <div
+                className="message__header-text">
+                <p>Павел</p>
+                <span>В сети</span>
+            </div>
+        const nointerlocutor =
+            <h1
+                className="message__header-text">Выберите собеседника, чтобы начать диалог
+        </h1>
+        return (
+            <div className="message__header">
+                <div className="message__header-info">
+                    <div className="message__header-avatar">
+                        <img src="test.png" alt=""></img>
+                    </div>
+                    {withInterlocutor ? interlocutor: nointerlocutor}
                 </div>
-                <div class="message__header-text">
-                    <p>Павел</p>
-                    <span>В сети</span>
+                <div className="message__header-menu">
+                    <i className="fa fa-book fa-lg"></i>
+                    <i className="fa fa-search fa-lg"></i>
                 </div>
             </div>
-            <div class="message__header-menu">
-                <i class="fa fa-book fa-lg"></i>
-                <i class="fa fa-search fa-lg"></i>
-            </div>
-        </div>
-    );
-};
-
-export default MessageHeader;
+        );
+    }
+}

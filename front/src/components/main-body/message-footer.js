@@ -24,23 +24,25 @@ export default class MessageFooter extends Component {
     };
 
     render() {
-        return (
-            <div className="message__footer">
-                <div class="message__footer-menu">
-                    <i class="fa fa-gift fa-lg"> </i>
-                    <i class="fa fa-camera fa-lg"></i>
-                    <i class="fa fa-microphone fa-lg"></i>
-                    <i class="fa fa-smile-o fa-lg"></i>
-                </div>
-                <form
-                    className="message__footer-message"
-                    onSubmit={this.onSubmit}>
-                    <input
+        const {withInterlocutor} = this.props;
+        const inputField = <input
                         type="text"
                         placeholder="Написать сообщение..."
                         onChange={this.onLabelChange}
                         value={this.state.label}>
                     </input>
+        return (
+            <div className="message__footer">
+                <div className="message__footer-menu">
+                    <i className="fa fa-gift fa-lg"> </i>
+                    <i className="fa fa-camera fa-lg"></i>
+                    <i className="fa fa-microphone fa-lg"></i>
+                    <i className="fa fa-smile-o fa-lg"></i>
+                </div>
+                <form
+                    className="message__footer-message"
+                    onSubmit={this.onSubmit}>
+                    {withInterlocutor ? inputField: null}
                     <button
                         type="submit"
                         className="fa fa-paper-plane fa-lg"></button>

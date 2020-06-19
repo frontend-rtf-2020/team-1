@@ -36,7 +36,6 @@ export default class App extends Component {
     axios
       .get("/api/logout")
       .then(() => {
-        console.log('logout then')
         this.setState({ user: null,  userChecked: true });
       })
       .catch(error => {
@@ -50,8 +49,6 @@ export default class App extends Component {
 
   render() {
     const { user, userChecked } = this.state;
-
-    console.log('render')
     return (
       <Router>
         <div className="messenger">

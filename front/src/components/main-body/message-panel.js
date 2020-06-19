@@ -6,9 +6,8 @@ import './messenger.css';
 
 const MessageItemRecieve = ({ label }) => {
     return (
-        <li class="message__container-item left ">
+        <li className="message__container-item left ">
             <div className="message__item">
-                Боря:
             </div>
             <div className="message__item-text">
                 <p>{label}</p>
@@ -39,14 +38,15 @@ export default class MessagePanel extends Component {
             { id: 1, label: 'SoMETIMES...' },
             { id: 2, label: 'God TAKES MOMMIES ANd PuPPIES AWAY...' },
             { id: 3, label: 'ANd SoMETIMES..' },
-            { id: 3, label: 'JuST SoMETIMES...I do' }
+            { id: 4, label: 'JuST SoMETIMES...I do' }
         ],
         messagesFromUser: [
             { id: 1, label: 'SoMETIMES...' },
             { id: 2, label: 'God TAKES MOMMIES ANd PuPPIES AWAY...' },
             { id: 3, label: 'ANd SoMETIMES..' },
-            { id: 3, label: 'JuST SoMETIMES...I do' }
-        ]
+            { id: 4, label: 'JuST SoMETIMES...I do' }
+        ],
+        withInterlocutor: false
     }
 
     onMessageAdded = (label) => {
@@ -62,8 +62,9 @@ export default class MessagePanel extends Component {
             label
         };
     }
+
     render() {
-        const { messagesToUser } = this.state;
+        const { messagesToUser, withInterlocutor } = this.state;
         const messagesToUserList = messagesToUser.map((item) => {
             const { id, ...itemProps } = item;
             return (
@@ -73,15 +74,16 @@ export default class MessagePanel extends Component {
             );
         });
         return (
-            <div class="message">
-                <MessageHeader />
-                <section class="message__container">
-                    <ul class="message__container-items">
-                        {messagesToUserList}
+            <div className="message">
+                <MessageHeader withInterlocutor={withInterlocutor} />
+                <section className="message__container" id="style-1">
+                    <ul className="message__container-items">
+                        {withInterlocutor? messagesToUserList: null}
                     </ul>
                 </section>
                 <MessageFooter
-                    onMessageAdded={this.onMessageAdded} />
+                    onMessageAdded={this.onMessageAdded}
+                    withInterlocutor={withInterlocutor} />
             </div>
         );
     }

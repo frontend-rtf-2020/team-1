@@ -15,11 +15,10 @@ export default class UsersListItem extends Component {
     }
 
   render() {
-    const { username, email, createDialog } = this.props;
+    const { username, email } = this.props;
     return (
       <div
-        className="contacts__item"
-        onClick={this.createDialog}>
+        className="contacts__item">
         <div className="contacts__item-left">
           <div className="contacts__item-text">
             <p>{username}</p>

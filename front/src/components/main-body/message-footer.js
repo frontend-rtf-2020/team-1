@@ -24,13 +24,19 @@ export default class MessageFooter extends Component {
     };
 
     render() {
-        const {withInterlocutor} = this.props;
-        const inputField = <input
-                        type="text"
-                        placeholder="Написать сообщение..."
-                        onChange={this.onLabelChange}
-                        value={this.state.label}>
-                    </input>
+        const { activeDialog } = this.props;
+        const inputField = <span>
+            <input
+                type="text"
+                placeholder="Написать сообщение..."
+                onChange={this.onLabelChange}
+                value={this.state.label}>
+            </input>
+            <button
+                type="submit"
+                className="fa fa-paper-plane fa-lg">
+            </button>
+        </span>
         return (
             <div className="message__footer">
                 <div className="message__footer-menu">
@@ -42,10 +48,8 @@ export default class MessageFooter extends Component {
                 <form
                     className="message__footer-message"
                     onSubmit={this.onSubmit}>
-                    {withInterlocutor ? inputField: null}
-                    <button
-                        type="submit"
-                        className="fa fa-paper-plane fa-lg"></button>
+                    {activeDialog ? inputField : null}
+
                 </form>
             </div>
         );

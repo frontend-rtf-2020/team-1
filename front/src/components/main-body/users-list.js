@@ -26,14 +26,16 @@ export default class UsersList extends Component {
   }
 
   render() {
+    const {activateDialog} = this.props;
     const elements = this.state.users
-      .map(({ id, ...itemProps }) => {
+      .map(( user ) => {
         return (
-          <li key={id} >
-            <UsersListItem {...itemProps} />
+          <li key={user.id} >
+            <UsersListItem {...user} activateDialog={activateDialog}/>
           </li>
         )
-      })
+      });
+
     return <ul>{elements}</ul>;
   }
 }

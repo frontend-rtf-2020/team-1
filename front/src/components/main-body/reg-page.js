@@ -97,7 +97,6 @@ export default class RegPage extends Component {
                         <form
                             id="form"
                             method="post"
-                            // action="/api/reg"
                             autoComplete="off"
                             onSubmit={this.handleSubmit}>
                             <input

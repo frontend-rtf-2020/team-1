@@ -2,11 +2,11 @@ import React from 'react';
 
 import './messenger.css';
 
-const DialogsListItem = ({ dialog, loadDialog, dialogs }) => {
+const DialogsListItem = ({ dialog, activateDialog }) => {
   return (
     <div
       className="contacts__item"
-      onClick={loadDialog}>
+      onClick={() => activateDialog(dialog.id)}>
       <div className="contacts__item-left">
         <div className="contacts__item-text">
           <p>{dialog.user.username}</p>

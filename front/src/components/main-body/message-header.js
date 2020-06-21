@@ -5,24 +5,21 @@ import './messenger.css';
 export default class MessageHeader extends Component {
 
     render() {
-        const {withInterlocutor} = this.props;
-        const interlocutor =
-            <div
+        const { activeDialog } = this.props;
+        const interlocutor = activeDialog ?
+            <p
                 className="message__header-text">
-                <p>Павел</p>
+                <p>{activeDialog.user.username}</p>
                 <span>В сети</span>
-            </div>
-        const nointerlocutor =
-            <h1
-                className="message__header-text">Выберите собеседника, чтобы начать диалог
-        </h1>
+            </p>
+        :
+            <p className="message__header-text">
+                Выберите собеседника, чтобы начать диалог
+            </p>
         return (
             <div className="message__header">
                 <div className="message__header-info">
-                    <div className="message__header-avatar">
-                        <img src="test.png" alt=""></img>
-                    </div>
-                    {withInterlocutor ? interlocutor: nointerlocutor}
+                    {interlocutor}
                 </div>
                 <div className="message__header-menu">
                     <i className="fa fa-book fa-lg"></i>

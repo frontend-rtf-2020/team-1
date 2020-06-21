@@ -6,14 +6,22 @@ import MessagePanel from './message-panel'
 import './messenger.css';
 
 export default class Messenger extends Component {
+  state = {
+    activeDialogId: null
+  }
+
+  activateDialog = (id) => {
+    this.setState({ activeDialogId: id })
+  }
 
   render() {
-    const {user} = this.props;
+    const { user } = this.props;
+
     return (
       <section className="section">
-        {user ? null :  <Redirect to="/authpage" />}
-        <ContactsPanel />
-        <MessagePanel />
+        {user ? null : <Redirect to="/authpage" />}
+        <ContactsPanel activateDialog={this.activateDialog} />
+        <MessagePanel activeDialogId={this.state.activeDialogId} />
       </section>
     );
   };

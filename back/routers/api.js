@@ -11,5 +11,6 @@ router.get('/users', service.searchUsers);
 
 router.post('/dialogs', service.createDialog);
 router.get('/dialogs', service.getUserDialogs);
+router.get('/dialogs/:id', service.getDialog);
 
 module.exports = router;

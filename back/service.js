@@ -64,7 +64,7 @@ function registration(req, res) {
     });
   } else {
     User.findOne({
-      email: 'email'
+      email
     }).then(user => {
       if (!user) {
         bcrypt.hash(password, 8, function (err, hash) {
@@ -133,10 +133,10 @@ function getCurrentUserData(req, res) {
 function getUserDialogs(req, res) {
   req.session.reload((err) => {
     const currentUserId = req.session.userId;
-    const convertDialog = ({ id, fromUser, toUser }) => {
+    const convertDialog = ({ _id, fromUser, toUser }) => {
       const user = fromUser.id === currentUserId ? toUser : fromUser;
       return {
-        id: id,
+        id: _id,
         user: convertUser(user)
       }
     };
@@ -158,7 +158,7 @@ function getUserDialogs(req, res) {
 
 const convertUser = (user) => {
   return {
-    id: user.id,
+    id: user._id,
     username: user.username,
     email: user.email
   }
@@ -182,12 +182,38 @@ function createDialog(req, res) {
         fromUser: currentUserId,
         toUser: req.query.userId
       }
-      Dialog.findOneAndUpdate(dialog, dialog, { upsert: true })
-        .then(res.status(200).end())
+      Dialog.findOneAndUpdate(dialog, dialog, { upsert: true, fields: ['_id'] })
+        .then(dialog => res.json(dialog))
     })
   } else {
     res.status(400).end();
   }
+}
+
+const getDialog = (req, res) => {
+  const dialogId = req.params.id;
+  req.session.reload((err) => {
+    const currentUserId = req.session.userId;
+    const convertDialog = ({ id, fromUser, toUser }) => {
+      const user = fromUser.id === currentUserId ? toUser : fromUser;
+      return {
+        id: id,
+        user: convertUser(user)
+      }
+    };
+
+    Dialog.findById(dialogId)
+      .populate('fromUser')
+      .populate('toUser')
+      .exec((err, dialog) => {
+        if (!err && dialog) {
+          res.json(convertDialog(dialog));
+        } else {
+          console.log(err);
+          res.status(404).end();
+        }
+      })
+  });
 }
 
 module.exports = {
@@ -197,5 +223,6 @@ module.exports = {
   getCurrentUserData,
   searchUsers,
   createDialog,
-  getUserDialogs
+  getUserDialogs,
+  getDialog
 }

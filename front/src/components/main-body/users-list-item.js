@@ -4,10 +4,12 @@ import axios from 'axios';
 import './messenger.css';
 
 export default class UsersListItem extends Component {
-  createDialog({username, email}) {
-    axios.post(`/api/dialogs`)
+  createDialog(id) {
+    const {activateDialog} = this.props;
+    axios.post(`/api/dialogs?userId=${id}`)
       .then(response => {
-        console.log('успех')
+        activateDialog(response.data.id);
+        
       })
       .catch(error => {
         console.log("creation error", error);
@@ -15,10 +17,11 @@ export default class UsersListItem extends Component {
     }
 
   render() {
-    const { username, email } = this.props;
+    const { id, username, email } = this.props;
     return (
       <div
-        className="contacts__item">
+        className="contacts__item"
+        onClick={() => this.createDialog(id)}>
         <div className="contacts__item-left">
           <div className="contacts__item-text">
             <p>{username}</p>
